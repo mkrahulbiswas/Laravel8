@@ -340,7 +340,7 @@ $('document').ready(function () {
     $("#updateRoleForm").submit(function (event) {
         submitForm = $(this);
         submitBtn = $(this).find('#updateRoleBtn');
-
+s
         event.preventDefault();
         $.ajax({
             url: $(this).attr('action'),
