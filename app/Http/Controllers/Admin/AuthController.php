@@ -1,0 +1,262 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Traits\FileTrait;
+use App\Traits\ValidationTrait;
+use App\Models\Admin;
+use App\Models\User;
+use Validator;
+use Exception;
+use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ForgotPassword;
+
+
+class AuthController extends Controller
+{
+
+    use ValidationTrait, FileTrait;
+    public $platform = 'backend';
+
+
+    public function showLogin()
+    {
+        try {
+            if (!Auth::guard('admin')->check()) {
+                return view('admin.auth.login');
+            } else {
+                return redirect()->route('dashboard.show');
+            }
+        } catch (Exception $e) {
+            abort(500);
+        }
+    }
+
+    public function checkLogin(Request $request)
+    {
+        try {
+            $validator = $this->isValid($request->all(), 'checkLogin', 0, $this->platform);
+            if ($validator->fails()) {
+                return response()->json(['status' => 0, 'msg' => __('messages.vErrMsg'), 'errors' => $validator->errors()], config('constants.ok'));
+            } else {
+                $values = $request->only('email', 'password');
+                if (Auth::guard('admin')->attempt(['email' => $values['email'], 'password' => $values['password']])) {
+                    return response()->json(['status' => 1, 'msg' => __('messages.successMsg')], config('constants.ok'));
+                } else {
+                    return response()->json(['status' => 0, 'msg' => __('messages.adminLoginErr')], config('constants.ok'));
+                }
+            }
+        } catch (Exception $e) {
+            return response()->json(['status' => 0, 'msg' => __('messages.serverErrMsg')], config('constants.ok'));
+        }
+    }
+
+    public function saveForgotPassword(Request $request)
+    {
+        try {
+            $values = $request->only('email');
+
+            $validator = $this->isValid($request->all(), 'saveForgotPassword', 0, $this->platform);
+            if ($validator->fails()) {
+                return response()->json(['status' => 0, 'msg' => __('messages.vErrMsg'), 'errors' => $validator->errors()], config('constants.ok'));
+            } else {
+                $otp = rand(100000, 999999);
+                $admin = Admin::where('email', $values['email'])->first();
+                if ($admin == null) {
+                    return response()->json(['status' => 0, 'msg' => 'Email not found, please check it again.'], config('constants.ok'));
+                } else {
+                    $admin->otp = $otp;
+                    if ($admin->update()) {
+                        $name = $admin->name;
+                        $data = array('name' => $name, 'otp' => $otp);
+
+                        if (Mail::to($values['email'])->send(new ForgotPassword($data)) == false) {
+                            return response()->json(['status' => 1, 'msg' => 'OTP is send to your email, please check it.'], config('constants.ok'));
+                        } else {
+                            return response()->json(['status' => 0, 'msg' => __('messages.serverErrMsg')], config('constants.ok'));
+                        }
+                    } else {
+                        return response()->json(['status' => 0, 'msg' => __('messages.serverErrMsg')], config('constants.ok'));
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            return response()->json(['status' => 0, 'msg' => __('messages.serverErrMsg')], config('constants.ok'));
+        }
+    }
+
+    public function updateResetPassword(Request $request)
+    {
+        try {
+            $values = $request->only('otp', 'password', 'confirmPassword');
+
+            $validator = $this->isValid($request->all(), 'updateResetPassword', 0, $this->platform);
+            if ($validator->fails()) {
+                return response()->json(['status' => 0, 'msg' => __('messages.vErrMsg'), 'errors' => $validator->errors()], config('constants.ok'));
+            } else {
+                $admin = Admin::where('otp', $values['otp'])->first();
+                if ($admin == null) {
+                    return response()->json(['status' => 0, 'msg' => 'OTP does\'t match.'], config('constants.ok'));
+                } else {
+                    $admin->otp = null;
+                    $admin->password = Hash::make($values['confirmPassword']);
+                    if ($admin->update()) {
+                        return response()->json(['status' => 1, 'msg' => 'Password Changed Successfully'], config('constants.ok'));
+                    } else {
+                        return response()->json(['status' => 0, 'msg' => __('messages.serverErrMsg')], config('constants.ok'));
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            return response()->json(['status' => 0, 'msg' => __('messages.serverErrMsg')], config('constants.ok'));
+        }
+    }
+
+
+
+
+    public function changePasswordLogin(Request $request)
+    {
+        $values = $request->only('id', 'password', 'password_confirmation');
+        $id = decrypt($values['id']);
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'password' => 'required|min:6|max:20|confirmed',
+            ],
+            [
+                'password.required' => 'This field is required.',
+                'password.min' => 'Password should be minimum 6 characters.',
+                'password.max' => 'Password should be maximum 20 characters.'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return view('admin.auth.change_password', ['id' => $id])->withErrors($validator);
+            //return redirect('/admin/changePassword')->withErrors($validator);
+        } else {
+            $admin = Admin::findOrFail($id);
+            $admin->password = Hash::make($values['password']);
+            $admin->isPwChange = '1';
+            if ($admin->update()) {
+                Auth::guard('admin')->loginUsingId($id);
+                return redirect('admin/dashboard');
+            } else {
+                return redirect('/admin/changePassword')->with('loginErr', 'Something went wrong.');
+            }
+        }
+    }
+
+    public function showChangePassword()
+    {
+        return view('admin.auth.passwordChange');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $values = $request->only('currentPassword', 'password');
+        $validator = $this->isValid($request->all(), 'changePassword', 0, $this->platform);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Validation error occurs.');
+        }
+
+        if (Hash::check($values['currentPassword'], Auth::guard('admin')->user()->password)) {
+            $user = Admin::find(Auth::guard('admin')->user()->user()->id);
+            $user->password = Hash::make($values['password']);
+            if ($user->update()) {
+                return redirect()->back()->with('success', 'Password successfully changed.');
+            } else {
+                return redirect()->back()->with('error', 'Failed to change Password.');
+            }
+        } else {
+            return redirect()->back()->with('error', 'Current password does not match.');
+        }
+    }
+
+    public function logout()
+    {
+        Auth::guard('admin')->logout();
+        return redirect('/admin');
+    }
+
+
+    public function showProfile()
+    {
+        $profile = Admin::where('id', Auth::guard('admin')->id())->first();
+        return view('admin.auth.profileChange')->with('profile', $profile);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        try {
+            $values = $request->only('file', 'name', 'email', 'phone');
+            $file = $request->file('file');
+
+            DB::beginTransaction();
+
+            $profile = Admin::find(Auth::guard('admin')->id());
+
+            $validator = $this->isValid($request->all(), 'updateProfile', $profile->id, $this->platform);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Validation error occurs.');
+            }
+
+            //==Check Email and Phone exist in user table==//
+            if ($profile->role_id == config('constants.dcAdmin')) {
+                $isEmailExist = User::where('email', $values['email'])->whereNotIn('userType', [config('constants.customer')])->get();
+                $isPhoneExist = User::where('phone', $values['phone'])->whereNotIn('userType', [config('constants.customer')])->get();
+                if ($isEmailExist->count() > 0) {
+                    if ($isEmailExist[0]->adminId != $profile->id) {
+                        return redirect()->back()->withInput()->with('error', 'The email already exists.');
+                    }
+                }
+
+                if ($isPhoneExist->count() > 0) {
+                    if ($isPhoneExist[0]->adminId != $profile->id) {
+                        return redirect()->back()->withInput()->with('error', 'The phone number already exists.');
+                    }
+                }
+            }
+            //==End Checking==//
+
+
+            if ($file) {
+                $imgType = 'adminPic';
+                $previousImg = $profile->profilePic;
+                $image = $this->uploadPicture($file, $previousImg, $this->platform, $imgType);
+                if ($image === false) {
+                    return redirect()->back()->with('error', 'Something went wrong.');
+                }
+            }
+
+            $profile->name = $values['name'];
+            $profile->email = $values['email'];
+            $profile->phone = $values['phone'];
+            if ($file) {
+                $profile->profilePic = $image;
+            }
+            if ($profile->update()) {
+                if ($profile->role_id == config('constants.dcAdmin')) {
+                    $user = User::where('adminId', $profile->id)->first();
+                    $user->name = $values['name'];
+                    $user->email = $values['email'];
+                    $user->phone = $values['phone'];
+                    $user->update();
+                }
+
+                DB::commit();
+                return redirect()->back()->withErrors($validator)->withInput()->with('success', 'Your profile is update successfully.');
+            }
+        } catch (Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+    }
+}
