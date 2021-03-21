@@ -7,34 +7,19 @@ return [
     'baseUrl' => $baseUrl,
 
     //Image
-    'image' => 'assets/images/',
+    'image' => 'assets/media/image/admin',
 
-    'adminPic' => 'assets/images/users/admin/',
-    'profilePic' => 'assets/images/users/customer/',
+    'adminPic' => 'assets/media/image/admin/users/admin/',
+    'profilePic' => 'assets/media/image/admin/users/customer/',
 
-    'bannerPic' => 'assets/images/banner/',
+    'bannerPic' => 'assets/media/image/admin/banner/',
 
-    'bigLogoPic' => 'assets/images/logo/big_logo/',
-    'smallLogoPic' => 'assets/images/logo/small_logo/',
-    'favIconPic' => 'assets/images/logo/fav_icon/',
+    'bigLogoPic' => 'assets/media/image/admin/logo/big_logo/',
+    'smallLogoPic' => 'assets/media/image/admin/logo/small_logo/',
+    'favIconPic' => 'assets/media/image/admin/logo/fav_icon/',
 
-    'avatar' => 'assets/images/avatar/',
-    'webIcon' => 'assets/images/webIcon/',
-
-
-    // 'image' => 'assets/media/image/admin',
-
-    // 'adminPic' => 'assets/media/image/admin/users/admin/',
-    // 'profilePic' => 'assets/media/image/admin/users/customer/',
-
-    // 'bannerPic' => 'assets/media/image/admin/banner/',
-
-    // 'bigLogoPic' => 'assets/media/image/admin/logo/big_logo/',
-    // 'smallLogoPic' => 'assets/media/image/admin/logo/small_logo/',
-    // 'favIconPic' => 'assets/media/image/admin/logo/fav_icon/',
-
-    // 'avatar' => 'assets/media/image/admin/avatar/',
-    // 'webIcon' => 'assets/media/image/admin/webIcon/',
+    'avatar' => 'assets/media/image/admin/avatar/',
+    'webIcon' => 'assets/media/image/admin/webIcon/',
 
     //Button Type
     'addBtn' => 'Add Button',
