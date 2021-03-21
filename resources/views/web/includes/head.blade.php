@@ -3,7 +3,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>{{config('app.name')}}</title>
-<link rel="shortcut icon" type="image/x-icon" href="{{ $favIcon }}">
+<link rel="shortcut icon" type="image/x-icon" href="">
 
 <!--slider-->
 <link href="{{asset('assets/web/css/bootstrap.css')}}" rel="stylesheet">

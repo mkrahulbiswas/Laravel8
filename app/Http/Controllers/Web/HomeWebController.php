@@ -9,6 +9,6 @@ class HomeWebController extends Controller
 {
     public function showHome()
     {
-        echo "aa";
+        return view('web.home.index');
     }
 }

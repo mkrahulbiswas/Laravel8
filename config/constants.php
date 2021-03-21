@@ -21,6 +21,21 @@ return [
     'avatar' => 'assets/images/avatar/',
     'webIcon' => 'assets/images/webIcon/',
 
+
+    // 'image' => 'assets/media/image/admin',
+
+    // 'adminPic' => 'assets/media/image/admin/users/admin/',
+    // 'profilePic' => 'assets/media/image/admin/users/customer/',
+
+    // 'bannerPic' => 'assets/media/image/admin/banner/',
+
+    // 'bigLogoPic' => 'assets/media/image/admin/logo/big_logo/',
+    // 'smallLogoPic' => 'assets/media/image/admin/logo/small_logo/',
+    // 'favIconPic' => 'assets/media/image/admin/logo/fav_icon/',
+
+    // 'avatar' => 'assets/media/image/admin/avatar/',
+    // 'webIcon' => 'assets/media/image/admin/webIcon/',
+
     //Button Type
     'addBtn' => 'Add Button',
     'saveBtn' => 'Save Button',
