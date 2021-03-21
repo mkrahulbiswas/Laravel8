@@ -20,7 +20,7 @@
                 </div> --}}
             </p>
 
-            <form id="filterCustomizeButtonForm" method="POST" action="{{ route('get.customizeButton') }}" class="m-b-20">
+            <form id="filterCustomizeButtonForm" method="POST" action="{{ route('admin.get.customizeButton') }}" class="m-b-20">
                 @csrf
 
                 <div class="row" style="background-color: #fff; padding-top: 20px; box-shadow: 0 5px 10px #bfbfbf; margin: 0; padding: 0;">
@@ -98,7 +98,7 @@
                         <h4 class="modal-title">Add Customize Button Style</h4>
                         <button type="button" class="close Close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
-                    <form id="saveCustomizeButtonForm" action="{{ route('save.customizeButton') }}" method="POST" enctype="multipart/form-data" novalidate="">
+                    <form id="saveCustomizeButtonForm" action="{{ route('admin.save.customizeButton') }}" method="POST" enctype="multipart/form-data" novalidate="">
                         @csrf
 
                         <div class="modal-body">
@@ -181,7 +181,7 @@
                         <h4 class="modal-title">Update Customize Button Style</h4>
                         <button type="button" class="close Close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
-                    <form id="updateCustomizeButtonForm" action="{{ route('update.customizeButton') }}" method="POST" enctype="multipart/form-data" novalidate="">
+                    <form id="updateCustomizeButtonForm" action="{{ route('admin.update.customizeButton') }}" method="POST" enctype="multipart/form-data" novalidate="">
                         @csrf
 
                         <div class="modal-body">

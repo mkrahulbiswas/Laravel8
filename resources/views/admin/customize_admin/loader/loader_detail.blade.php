@@ -10,7 +10,7 @@
         <h4 class="page-title">Loader Details</h4>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Customize Admin</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('show.customizeLoader') }}">Loader</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.show.customizeLoader') }}">Loader</a></li>
             <li class="breadcrumb-item active">Loader Details</li>
         </ol>
     </div>
@@ -133,7 +133,7 @@
                                 <div class="col-lg-12 m-b-20">
                                     <div class="accordion" id="accordionTwo">
                                         
-                                        <form id="updateCustomizeLoaderForm" action="{{ route('update.customizeLoader') }}" method="POST" enctype="multipart/form-data" novalidate="">
+                                        <form id="updateCustomizeLoaderForm" action="{{ route('admin.update.customizeLoader') }}" method="POST" enctype="multipart/form-data" novalidate="">
                                             @csrf
                 
                                             <input type="hidden" name="id" id="id" value="{{ $data['id'] }}">

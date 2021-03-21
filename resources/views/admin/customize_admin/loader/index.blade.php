@@ -75,7 +75,7 @@
                         <h4 class="modal-title">Add Customize Loader</h4>
                         <button type="button" class="close Close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
-                    <form id="saveCustomizeLoaderForm" action="{{ route('save.customizeLoader') }}" method="POST" enctype="multipart/form-data" novalidate="">
+                    <form id="saveCustomizeLoaderForm" action="{{ route('admin.save.customizeLoader') }}" method="POST" enctype="multipart/form-data" novalidate="">
                         @csrf
 
                         <div class="modal-body">
@@ -138,7 +138,7 @@
                         <h4 class="modal-title">Update Customize Loader</h4>
                         <button type="button" class="close Close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
-                    <form id="updateCustomizeLoaderForm" action="{{ route('update.customizeLoader') }}" method="POST" enctype="multipart/form-data" novalidate="">
+                    <form id="updateCustomizeLoaderForm" action="{{ route('admin.update.customizeLoader') }}" method="POST" enctype="multipart/form-data" novalidate="">
                         @csrf
 
                         <div class="modal-body">

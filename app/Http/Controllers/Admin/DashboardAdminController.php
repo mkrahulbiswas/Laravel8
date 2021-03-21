@@ -11,7 +11,7 @@ use App\Feedback;
 
 use Illuminate\Support\Carbon;
 
-class DashboardController extends Controller
+class DashboardAdminController extends Controller
 {
     public function index()
     {

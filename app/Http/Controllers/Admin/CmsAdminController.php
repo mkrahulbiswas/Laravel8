@@ -23,7 +23,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 
 
-class CmsController extends Controller
+class CmsAdminController extends Controller
 {
     use FileTrait, CommonTrait, ValidationTrait;
     public $platform = 'backend';

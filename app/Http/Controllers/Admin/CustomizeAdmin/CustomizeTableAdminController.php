@@ -10,14 +10,14 @@ use App\Traits\CommonTrait;
 use App\Traits\FileTrait;
 use App\Traits\ValidationTrait;
 
-use App\CustomizeTable;
+use App\Models\CustomizeTable;
 
 use League\Flysystem\Exception;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 
-class CustomizeTableController extends Controller
+class CustomizeTableAdminController extends Controller
 {
     use FileTrait, CommonTrait, ValidationTrait;
     public $platform = 'backend';
@@ -81,28 +81,28 @@ class CustomizeTableController extends Controller
 
                     if ($itemPermission['status_item'] == '1') {
                         if ($data->status == "0") {
-                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="unblock" data-action="' . route('status.customizeTable') . '/' . $dataArray['id'] . '/' . '" class="actionDatatable" title="Block"><i class="md md-lock" style="font-size: 20px; color: #2bbbad;"></i></a>';
+                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="unblock" data-action="' . route('admin.status.customizeTable') . '/' . $dataArray['id'] . '/' . '" class="actionDatatable" title="Block"><i class="md md-lock" style="font-size: 20px; color: #2bbbad;"></i></a>';
                         } else {
-                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="block" data-action="' . route('status.customizeTable') . '/' . $dataArray['id'] . '/' . '" class="actionDatatable" title="Unblock"><i class="md md-lock-open" style="font-size: 20px; color: #2bbbad;"></i></a>';
+                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="block" data-action="' . route('admin.status.customizeTable') . '/' . $dataArray['id'] . '/' . '" class="actionDatatable" title="Unblock"><i class="md md-lock-open" style="font-size: 20px; color: #2bbbad;"></i></a>';
                         }
                     } else {
                         $status = '';
                     }
 
                     if ($itemPermission['edit_item'] == '1') {
-                        $edit = '<a href="' . route('edit.customizeTableColor') . '/' . $dataArray['id'] . '" target="_blank" title="Update"><i class="md md-edit" style="font-size: 20px;"></i></a>';
+                        $edit = '<a href="' . route('admin.edit.customizeTableColor') . '/' . $dataArray['id'] . '" target="_blank" title="Update"><i class="md md-edit" style="font-size: 20px;"></i></a>';
                     } else {
                         $edit = '';
                     }
 
                     if ($itemPermission['delete_item'] == '1') {
-                        $delete = '<a href="JavaScript:void(0);" data-type="delete" data-action="' . route('delete.customizeTable') . '/' . $dataArray['id'] . '" class="actionDatatable" title="Delete"><i class="md md-delete" style="font-size: 20px; color: red;"></i></a>';
+                        $delete = '<a href="JavaScript:void(0);" data-type="delete" data-action="' . route('admin.delete.customizeTable') . '/' . $dataArray['id'] . '" class="actionDatatable" title="Delete"><i class="md md-delete" style="font-size: 20px; color: red;"></i></a>';
                     } else {
                         $delete = '';
                     }
 
                     if ($itemPermission['details_item'] == '1') {
-                        $detail = '<a href="' .  route('details.customizeTable') . '/' . $dataArray['id'] . '" target="_blank" title="Details"><i class="md md-visibility" style="font-size: 20px; color: green;"></i></a>';
+                        $detail = '<a href="' .  route('admin.details.customizeTable') . '/' . $dataArray['id'] . '" target="_blank" title="Details"><i class="md md-visibility" style="font-size: 20px; color: green;"></i></a>';
                     } else {
                         $detail = '';
                     }

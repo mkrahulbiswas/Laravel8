@@ -21,7 +21,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 
-class UserController extends Controller
+class UserAdminController extends Controller
 {
 
     use ValidationTrait, FileTrait, CommonTrait;

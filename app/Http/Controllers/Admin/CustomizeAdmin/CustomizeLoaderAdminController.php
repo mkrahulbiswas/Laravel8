@@ -9,14 +9,14 @@ use App\Traits\CommonTrait;
 use App\Traits\FileTrait;
 use App\Traits\ValidationTrait;
 
-use App\CustomizeLoader;
+use App\Models\CustomizeLoader;
 
 use League\Flysystem\Exception;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 
-class CustomizeLoaderController extends Controller
+class CustomizeLoaderAdminController extends Controller
 {
     use FileTrait, CommonTrait, ValidationTrait;
     public $platform = 'backend';
@@ -75,9 +75,9 @@ class CustomizeLoaderController extends Controller
 
                     if ($itemPermission['status_item'] == '1') {
                         if ($data->status == "0") {
-                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="unblock" data-action="' . route('status.customizeLoader') . '/' . $dataArray['id'] . '/' . '" class="actionDatatable" title="Block"><i class="md md-lock" style="font-size: 20px; color: #2bbbad;"></i></a>';
+                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="unblock" data-action="' . route('admin.status.customizeLoader') . '/' . $dataArray['id'] . '/' . '" class="actionDatatable" title="Block"><i class="md md-lock" style="font-size: 20px; color: #2bbbad;"></i></a>';
                         } else {
-                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="block" data-action="' . route('status.customizeLoader') . '/' . $dataArray['id'] . '/' . '" class="actionDatatable" title="Unblock"><i class="md md-lock-open" style="font-size: 20px; color: #2bbbad;"></i></a>';
+                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="block" data-action="' . route('admin.status.customizeLoader') . '/' . $dataArray['id'] . '/' . '" class="actionDatatable" title="Unblock"><i class="md md-lock-open" style="font-size: 20px; color: #2bbbad;"></i></a>';
                         }
                     } else {
                         $status = '';
@@ -90,13 +90,13 @@ class CustomizeLoaderController extends Controller
                     }
 
                     if ($itemPermission['delete_item'] == '1') {
-                        $delete = '<a href="JavaScript:void(0);" data-type="delete" data-action="' . route('delete.customizeLoader') . '/' . $dataArray['id'] . '" class="actionDatatable" title="Delete"><i class="md md-delete" style="font-size: 20px; color: red;"></i></a>';
+                        $delete = '<a href="JavaScript:void(0);" data-type="delete" data-action="' . route('admin.delete.customizeLoader') . '/' . $dataArray['id'] . '" class="actionDatatable" title="Delete"><i class="md md-delete" style="font-size: 20px; color: red;"></i></a>';
                     } else {
                         $delete = '';
                     }
 
                     if ($itemPermission['details_item'] == '1') {
-                        $detail = '<a href="' .  route('details.customizeLoader') . '/' . $dataArray['id'] . '" target="_blank" title="Details" class="actionDatatable"><i class="md md-visibility" style="font-size: 20px; color: green;"></i></a>';
+                        $detail = '<a href="' .  route('admin.details.customizeLoader') . '/' . $dataArray['id'] . '" target="_blank" title="Details" class="actionDatatable"><i class="md md-visibility" style="font-size: 20px; color: green;"></i></a>';
                     } else {
                         $detail = '';
                     }
@@ -151,9 +151,9 @@ class CustomizeLoaderController extends Controller
 
                     if ($itemPermission['status_item'] == '1') {
                         if ($data->status == "0") {
-                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="unblock" data-action="' . route('status.customizeLoader') . '/' . $dataArray['id'] . '/' . '" class="actionDatatable" title="Block"><i class="md md-lock" style="font-size: 20px; color: #2bbbad;"></i></a>';
+                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="unblock" data-action="' . route('admin.status.customizeLoader') . '/' . $dataArray['id'] . '/' . '" class="actionDatatable" title="Block"><i class="md md-lock" style="font-size: 20px; color: #2bbbad;"></i></a>';
                         } else {
-                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="block" data-action="' . route('status.customizeLoader') . '/' . $dataArray['id'] . '/' . '" class="actionDatatable" title="Unblock"><i class="md md-lock-open" style="font-size: 20px; color: #2bbbad;"></i></a>';
+                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="block" data-action="' . route('admin.status.customizeLoader') . '/' . $dataArray['id'] . '/' . '" class="actionDatatable" title="Unblock"><i class="md md-lock-open" style="font-size: 20px; color: #2bbbad;"></i></a>';
                         }
                     } else {
                         $status = '';
@@ -166,13 +166,13 @@ class CustomizeLoaderController extends Controller
                     }
 
                     if ($itemPermission['delete_item'] == '1') {
-                        $delete = '<a href="JavaScript:void(0);" data-type="delete" data-action="' . route('delete.customizeLoader') . '/' . $dataArray['id'] . '" class="actionDatatable" title="Delete"><i class="md md-delete" style="font-size: 20px; color: red;"></i></a>';
+                        $delete = '<a href="JavaScript:void(0);" data-type="delete" data-action="' . route('admin.delete.customizeLoader') . '/' . $dataArray['id'] . '" class="actionDatatable" title="Delete"><i class="md md-delete" style="font-size: 20px; color: red;"></i></a>';
                     } else {
                         $delete = '';
                     }
 
                     if ($itemPermission['details_item'] == '1') {
-                        $detail = '<a href="' .  route('details.customizeLoader') . '/' . $dataArray['id'] . '" target="_blank" title="Details" class="actionDatatable"><i class="md md-visibility" style="font-size: 20px; color: green;"></i></a>';
+                        $detail = '<a href="' .  route('admin.details.customizeLoader') . '/' . $dataArray['id'] . '" target="_blank" title="Details" class="actionDatatable"><i class="md md-visibility" style="font-size: 20px; color: green;"></i></a>';
                     } else {
                         $detail = '';
                     }

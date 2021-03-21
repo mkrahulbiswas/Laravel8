@@ -10,7 +10,7 @@
         <h4 class="page-title">Customize Table Color Detail View</h4>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Customize Admin</a></li>
-            <li class="breadcrumb-item active"><a href="{{ route('show.appearance') }}">Appearance</a></li>
+            <li class="breadcrumb-item active"><a href="{{ route('admin.show.appearance') }}">Appearance</a></li>
             <li class="breadcrumb-item active">Customize Table Color Detail View</li>
         </ol>
     </div>

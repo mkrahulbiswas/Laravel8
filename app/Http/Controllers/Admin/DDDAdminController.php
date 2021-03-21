@@ -22,7 +22,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 
-class DDDController extends Controller
+class DDDAdminController extends Controller
 {
     use ValidationTrait, FileTrait, CommonTrait;
     public $platform = 'backend';

@@ -21,7 +21,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 
 
-class RoleController extends Controller
+class RoleAdminController extends Controller
 {
 
     use FileTrait, CommonTrait, ValidationTrait;

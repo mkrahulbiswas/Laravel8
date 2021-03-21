@@ -9,14 +9,14 @@ use App\Traits\CommonTrait;
 use App\Traits\FileTrait;
 use App\Traits\ValidationTrait;
 
-use App\CustomizeButton;
+use App\Models\CustomizeButton;
 
 use League\Flysystem\Exception;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 
-class CustomizeButtonController extends Controller
+class CustomizeButtonAdminController extends Controller
 {
     use FileTrait, CommonTrait, ValidationTrait;
     public $platform = 'backend';
@@ -125,9 +125,9 @@ class CustomizeButtonController extends Controller
 
                     if ($itemPermission['status_item'] == '1') {
                         if ($data->status == "0") {
-                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="unblock" data-action="' . route('status.customizeButton') . '/' . $dataArray['id'] . '/' . $dataArray['btnFor'] . '" class="actionDatatable" title="Block"><i class="md md-lock" style="font-size: 20px; color: #2bbbad;"></i></a>';
+                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="unblock" data-action="' . route('admin.status.customizeButton') . '/' . $dataArray['id'] . '/' . $dataArray['btnFor'] . '" class="actionDatatable" title="Block"><i class="md md-lock" style="font-size: 20px; color: #2bbbad;"></i></a>';
                         } else {
-                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="block" data-action="' . route('status.customizeButton') . '/' . $dataArray['id'] . '/' . $dataArray['btnFor'] . '" class="actionDatatable" title="Unblock"><i class="md md-lock-open" style="font-size: 20px; color: #2bbbad;"></i></a>';
+                            $status = '<a href="JavaScript:void(0);" data-type="status" data-status="block" data-action="' . route('admin.status.customizeButton') . '/' . $dataArray['id'] . '/' . $dataArray['btnFor'] . '" class="actionDatatable" title="Unblock"><i class="md md-lock-open" style="font-size: 20px; color: #2bbbad;"></i></a>';
                         }
                     } else {
                         $status = '';
@@ -140,7 +140,7 @@ class CustomizeButtonController extends Controller
                     }
 
                     if ($itemPermission['delete_item'] == '1') {
-                        $delete = '<a href="JavaScript:void(0);" data-type="delete" data-action="' . route('delete.customizeButton') . '/' . $dataArray['id'] . '" class="actionDatatable" title="Delete"><i class="md md-delete" style="font-size: 20px; color: red;"></i></a>';
+                        $delete = '<a href="JavaScript:void(0);" data-type="delete" data-action="' . route('admin.delete.customizeButton') . '/' . $dataArray['id'] . '" class="actionDatatable" title="Delete"><i class="md md-delete" style="font-size: 20px; color: red;"></i></a>';
                     } else {
                         $delete = '';
                     }

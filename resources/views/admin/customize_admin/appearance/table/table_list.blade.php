@@ -8,7 +8,7 @@
                     @if($itemPermission['add_item']=='1')
                     <div class="btn-group pull-right">
                         <button type="button" data-toggle="modal" data-target="#con-add-modal-table"  class="btn addBtn waves-effect waves-light"><i class=""></i> Add Customize Table</button>
-                        {{-- <a href="{{ route('add.customizeTable') }}" target="_blank" class="btn addBtn waves-effect waves-light"><i class=""></i> Add Customize Table</a> --}}
+                        {{-- <a href="{{ route('admin.add.customizeTable') }}" target="_blank" class="btn addBtn waves-effect waves-light"><i class=""></i> Add Customize Table</a> --}}
                     </div>
                     @endif
                     <h4 class="header-title">Customize Table</h4>
@@ -17,7 +17,7 @@
 
             <p class="text-muted font-14 m-b-30"></p>
 
-            <form id="filterCustomizeTableForm" method="POST" action="{{ route('get.customizeTable') }}" class="m-b-20">
+            <form id="filterCustomizeTableForm" method="POST" action="{{ route('admin.get.customizeTable') }}" class="m-b-20">
                 @csrf
 
                 <div class="row" style="background-color: #fff; padding-top: 20px; box-shadow: 0 5px 10px #bfbfbf; margin: 0; padding: 0;">
@@ -92,9 +92,9 @@
                                     <label for="customizeTableAdd">Table Customize Type List<span class="text-danger">*</span></label>
                                     <select class="selectpicker" name="customizeTableAdd" id="customizeTableAdd" data-style="btn-primary btn-custom">
                                         <option value="">Select Customize Type</option>
-                                        <option value="1" data-action="{{ route('add.customizeTableColor') }}">Add Table Body & Head Color</option>
-                                        <option value="2" data-action="{{ route('add.customizeTableStyle') }}">Apply Table Body & Head Style</option>
-                                        <option value="3" data-action="{{ route('add.customizeTableStyle') }}">Apply Table Body Style</option>
+                                        <option value="1" data-action="{{ route('admin.add.customizeTableColor') }}">Add Table Body & Head Color</option>
+                                        <option value="2" data-action="{{ route('admin.add.customizeTableStyle') }}">Apply Table Body & Head Style</option>
+                                        <option value="3" data-action="{{ route('admin.add.customizeTableStyle') }}">Apply Table Body Style</option>
                                     </select>
                                     <span role="alert" id="customizeTableAddErr" style="color:red;font-size: 12px"></span>
                                 </div>

@@ -10,7 +10,7 @@
         <h4 class="page-title">Add Customize Table Style</h4>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Customize Admin</a></li>
-            <li class="breadcrumb-item active"><a href="{{ route('show.appearance') }}">Appearance</a></li>
+            <li class="breadcrumb-item active"><a href="{{ route('admin.show.appearance') }}">Appearance</a></li>
             <li class="breadcrumb-item active">Add Customize Table Style</li>
         </ol>
     </div>
@@ -23,7 +23,7 @@
         <div class="card-box">
 
             <p class="text-muted font-14 m-b-20"></p>
-            <form id="saveCustomizeTableStyleForm" action="{{route('save.customizeTableStyle')}}" method="POST" enctype="multipart/form-data">
+            <form id="saveCustomizeTableStyleForm" action="{{route('admin.save.customizeTableStyle')}}" method="POST" enctype="multipart/form-data">
 
                 @csrf
 

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ForgotPassword;
 
 
-class AuthController extends Controller
+class AuthAdminController extends Controller
 {
 
     use ValidationTrait, FileTrait;
