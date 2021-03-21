@@ -3,7 +3,12 @@
 </script>
 <script src="{{asset('assets/admin/js/jquery.min.js')}}"></script>
 <script src="{{asset('assets/admin/js/popper.min.js')}}"></script>
+
+{{-- <script src="{{asset('assets/admin/plugins/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/js/bootstrap.esm.min.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/js/bootstrap.bundle.min.js')}}"></script> --}}
 <script src="{{asset('assets/admin/js/bootstrap.min.js')}}"></script>
+
 <script src="{{asset('assets/admin/js/detect.js')}}"></script>
 <script src="{{asset('assets/admin/js/fastclick.js')}}"></script>
 <script src="{{asset('assets/admin/js/jquery.slimscroll.js')}}"></script>
@@ -17,8 +22,11 @@
 
 
 <!-- ( Sweet Alart 2 ) -->
-<script src="{{asset('assets/web/plugins/sweet-alert2/sweetalert2.min.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/sweet-alert2/sweetalert2.min.js')}}"></script>
 {{-- <script src="{{asset('assets/web/plugins/sweet-alert2/sweetalert.min.js')}}"></script> --}}
+
+<!-- ( Jquery Toast ) -->
+<script src="{{asset('assets/admin/plugins/toast/jquery.toast.min.js')}}"></script>
 
 
 @if ($checkOne == 'loginPage')

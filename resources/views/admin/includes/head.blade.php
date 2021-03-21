@@ -6,14 +6,26 @@
 <title>{{ $reqData['appName'] }} Admin</title>
 
 
+{{-- <link href="{{asset('assets/admin/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/admin/plugins/bootstrap/css/bootstrap.rtl.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/admin/plugins/bootstrap/css/bootstrap-grid.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/admin/plugins/bootstrap/css/bootstrap-grid.rtl.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/admin/plugins/bootstrap/css/bootstrap-reboot.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/admin/plugins/bootstrap/css/bootstrap-reboot.rtl.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/admin/plugins/bootstrap/css/bootstrap-utilities.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/admin/plugins/bootstrap/css/bootstrap-utilities.rtl.min.css')}}" rel="stylesheet" type="text/css" /> --}}
+
 <link href="{{asset('assets/admin/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/admin/css/icons.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/admin/css/style.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/admin/css/custom.css')}}" rel="stylesheet" type="text/css" />
 <script src="{{asset('assets/admin/js/modernizr.min.js')}}"></script>
 
-    <!-- ( Sweet Alart 2 ) -->
-    <link href="{{asset('assets/web/plugins/sweet-alert2/sweetalert2.min.css')}}" rel="stylesheet">
+<!-- ( Sweet Alart 2 ) -->
+<link href="{{asset('assets/admin/plugins/sweet-alert2/sweetalert2.min.css')}}" rel="stylesheet">
+
+<!-- ( Jquery Toast ) -->
+<link href="{{asset('assets/admin/plugins/toast/jquery.toast.min.css')}}" rel="stylesheet">
 
 @if ($checkOne == 'loginPage')
 

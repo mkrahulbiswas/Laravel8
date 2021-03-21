@@ -35,7 +35,7 @@
                 <!-- Responsive is an extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table. -->
             </p>
 
-            <form action="{{route('permissions.update')}}" method="POST">
+            <form action="{{route('admin.update.permissions')}}" method="POST">
                 @csrf
                 <table id="PermissionCheckbox" class="table table-bordered table-bordered dt-responsive nowrap"
                     cellspacing="0" width="100%">
@@ -182,7 +182,7 @@
 
 
 <!-- Modal -->
-<div class="row">
+{{-- <div class="row">
     <div class="col-12">
        
             <!-- Modal Start -->
@@ -216,7 +216,7 @@
             <!-- Modal End -->
         
     </div>
-</div>
+</div> --}}
 @endsection
 
 

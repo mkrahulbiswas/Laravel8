@@ -102,7 +102,7 @@ class RoleController extends Controller
             $values = $request->only('role', 'description');
             $validator = $this->isValid($request->all(), 'saveRole', 0, $this->platform);
             if ($validator->fails()) {
-                return response()->json(['status' => 0, 'msg' => config('constants.vErrMsg'), 'errors' => $validator->errors()], config('constants.ok'));
+                return response()->json(['status' => 0, 'type'=>"error", 'title' => "Validation", 'msg' => config('constants.vErrMsg'), 'errors' => $validator->errors()], config('constants.ok'));
             } else {
                 $role = new Role;
                 $role->role = $values['role'];
@@ -129,13 +129,13 @@ class RoleController extends Controller
                         $permission->save();
                     }
 
-                    return response()->json(['status' => 1, 'msg' => 'Banner Successfully saved.'], config('constants.ok'));
+                    return response()->json(['status' => 1, 'type'=>"success", 'title' => "Add Role", 'msg' => 'Banner Successfully saved.'], config('constants.ok'));
                 } else {
-                    return response()->json(['status' => 0, 'msg' => config('constants.serverErrMsg')], config('constants.ok'));
+                    return response()->json(['status' => 0, 'type'=>"warning", 'title' => "Add Role", 'msg' => config('constants.serverErrMsg')], config('constants.ok'));
                 }
             }
         } catch (Exception $e) {
-            return Response()->Json(['status' => 0, 'msg' => config('constants.serverErrMsg')], config('constants.ok'));
+            return Response()->Json(['status' => 0, 'type'=>"error", 'title' => "Validation", 'msg' => config('constants.serverErrMsg')], config('constants.ok'));
         }
     }
 
@@ -153,20 +153,20 @@ class RoleController extends Controller
             //--Checking The Validation--//
             $validator = $this->isValid($request->all(), 'updateRole', 0, $this->platform);
             if ($validator->fails()) {
-                return response()->json(['status' => 0, 'msg' => config('constants.vErrMsg'), 'errors' => $validator->errors()], config('constants.ok'));
+                return response()->json(['status' => 0, 'type'=>"error", 'title' => "Add Role", 'msg' => config('constants.vErrMsg'), 'errors' => $validator->errors()], config('constants.ok'));
             } else {
                 $role = Role::find($id);
                 $role->role = $values['role'];
                 $role->description = $values['description'];
 
                 if ($role->update()) {
-                    return response()->json(['status' => 1, 'msg' => 'Role Successfully updated.'], config('constants.ok'));
+                    return response()->json(['status' => 1, 'type'=>"success", 'title' => "Update Role", 'msg' => 'Role Successfully updated.'], config('constants.ok'));
                 } else {
-                    return response()->json(['status' => 0, 'msg' => config('constants.serverErrMsg')], config('constants.ok'));
+                    return response()->json(['status' => 0, 'type'=>"warning", 'title' => "Update Role", 'msg' => config('constants.serverErrMsg')], config('constants.ok'));
                 }
             }
         } catch (Exception $e) {
-            return response()->json(['status' => 0, 'msg' => config('constants.serverErrMsg')], config('constants.ok'));
+            return response()->json(['status' => 0, 'type'=>"error", 'title' => "Update Role", 'msg' => config('constants.serverErrMsg')], config('constants.ok'));
         }
     }
 
@@ -181,12 +181,12 @@ class RoleController extends Controller
         try {
             $result = $this->changeStatus($id, 'Role');
             if ($result === true) {
-                return response()->json(['status' => 1, 'msg' => 'Status successfully changed.'], config('constants.ok'));
+                return response()->json(['status' => 1, 'type'=>"success", 'title' => "Change Role Status", 'msg' => 'Status successfully changed.'], config('constants.ok'));
             } else {
-                return Response()->json(['status' => 0, 'msg' => config('constants.serverErrMsg')], config('constants.ok'));
+                return Response()->json(['status' => 0, 'type'=>"warning", 'title' => "Change Role Status", 'msg' => config('constants.serverErrMsg')], config('constants.ok'));
             }
         } catch (Exception $e) {
-            return Response()->json(['status' => 0, 'msg' => config('constants.serverErrMsg')], config('constants.ok'));
+            return Response()->json(['status' => 0, 'type'=>"error", 'title' => "Change Role Status", 'msg' => config('constants.serverErrMsg')], config('constants.ok'));
         }
     }
 

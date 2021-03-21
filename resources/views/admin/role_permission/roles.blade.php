@@ -74,7 +74,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary waves-effect waves-light" id="saveRoleBtn" type="submit"><i class="ti-save"></i><span>Save</span></button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light" id="saveRoleBtn" type="submit"><i class="ti-save"></i> <span> Save</span></button>
                         </div>
                     </form>
                 </div>
@@ -82,6 +82,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-12">
@@ -113,7 +114,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary waves-effect waves-light" id="updateRoleBtn" type="submit"><i class="ti-save"></i><span>Save</span></button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light" id="updateRoleBtn" type="submit"><i class="ti-save"></i> <span>Update</span></button>
                         </div>
                     </form>
                 </div>
@@ -121,6 +122,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-12">
@@ -137,14 +139,12 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="role">Role<span class="text-danger">*</span></label>
-                                        <input type="text" name="role" placeholder="Role" class="form-control" id="role">
-                                        <span role="alert" id="roleErr" style="color:red;font-size: 12px"></span>
+                                        <label for="role"><b>Role: </b></label>
+                                        <span id="role"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="role">Description<span class="text-danger">*</span></label>
-                                        <textarea name="description" placeholder="Role Description" class="form-control" id="description"></textarea>
-                                        <span role="alert" id="descriptionErr" style="color:red;font-size: 12px"></span>
+                                        <label for="description"><b>Description: </b></label>
+                                        <span id="description"></span>
                                     </div>
                                 </div>
                             </div>
@@ -153,6 +153,7 @@
                             <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

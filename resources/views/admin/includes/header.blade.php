@@ -22,6 +22,7 @@
 
     <!-- Button mobile view to collapse sidebar menu -->
     <nav class="navbar-custom">
+    {{-- <nav class="navbar-custom d-flex flex-row-reverse justify-content-between p-r-0"> --}}
 
         <ul class="list-inline float-right mb-0">
             <li class="list-inline-item notification-list">

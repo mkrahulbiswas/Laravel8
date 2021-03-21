@@ -17,6 +17,18 @@ $('document').ready(function () {
         }
     }
 
+    function toaster(title, msg, type){
+        $.toast({
+            heading: title,
+            text: msg,
+            showHideTransition: 'slide',
+            icon: type,
+            hideAfter: 10000,
+            stack: 3,
+            position: 'bottom-right',
+        });
+    }
+
 
     /*--========================= ( USER START ) =========================--*/
     //====Save Sub Admin====//
@@ -299,36 +311,19 @@ $('document').ready(function () {
             },
             success: function (msg) {
                 loader(0);
-                submitBtn.attr("disabled", false).find('span').text('save');
+                submitBtn.attr("disabled", false).find('span').text('Save');
                 submitForm.find("#roleErr, #descriptionErr").text('');
 
                 if (msg.status == 0) {
-                    Swal.fire({
-                        position: 'center-center',
-                        icon: 'warning',
-                        title: 'Opps....!',
-                        text: msg.msg,
-                        showConfirmButton: false,
-                        timer: 3000
-                    });
-
                     $.each(msg.errors.role, function (i) {
                         submitForm.find("#roleErr").text(msg.errors.role[i]);
                     });
                     $.each(msg.errors.description, function (i) {
                         submitForm.find("#descriptionErr").text(msg.errors.description[i]);
                     });
-
+                    toaster(msg.title, msg.msg, msg.type);
                 } else {
-                    Swal.fire({
-                        position: 'center-center',
-                        icon: 'success',
-                        title: 'Opps....!',
-                        text: msg.msg,
-                        showConfirmButton: false,
-                        timer: 3000
-                    });
-
+                    toaster(msg.title, msg.msg, msg.type);
                     submitForm[0].reset();
                     $('#rolePermision-role-listing').DataTable().ajax.reload(null, false);
                 }
@@ -356,20 +351,12 @@ $('document').ready(function () {
             },
             success: function (msg) {
                 loader(0);
-                submitBtn.attr("disabled", false).find('span').text('update');
+                submitBtn.attr("disabled", false).find('span').text('Update');
 
                 submitForm.find("#roleErr, #descriptionErr").text('');
 
                 if (msg.status == 0) {
-                    Swal.fire({
-                        position: 'center-center',
-                        icon: 'warning',
-                        title: 'Opps....!',
-                        text: msg.msg,
-                        showConfirmButton: false,
-                        timer: 3000
-                    });
-
+                    toaster(msg.title, msg.msg, msg.type);
                     $.each(msg.errors.role, function (i) {
                         submitForm.find("#roleErr").text(msg.errors.role[i]);
                     });
@@ -378,34 +365,21 @@ $('document').ready(function () {
                     });
 
                 } else {
-                    Swal.fire({
-                        position: 'center-center',
-                        icon: 'success',
-                        title: 'Success',
-                        text: msg.msg,
-                        showConfirmButton: false,
-                        timer: 3000
-                    });
-
-                    setTimeout(function () {
-                        submitForm.find("#alert").css('display', 'none');
-                    }, 2000);
-
-                    setTimeout(function () {
-                        $('#cms-logo-listing').DataTable().ajax.reload(null, false);
-                    }, 1000);
+                    toaster(msg.title, msg.msg, msg.type);
+                    $('#rolePermision-role-listing').DataTable().ajax.reload(null, false);
                 }
             }
         });
     });
 
-    //---- ( Role Update ) ----//
+    //---- ( Role Status, Edir, Detail ) ----//
     $('body').delegate('#rolePermision-role-listing .actionDatatable', 'click', function () {
         var type = $(this).attr('data-type'),
             res = '',
             action = $(this).attr('data-action'),
             reloadDatatable = $('#rolePermision-role-listing').DataTable(),
-            targetClass = '';
+            targetClass = ''
+            data = '';
         if (type == 'status') {
 
             if ($(this).attr('data-status') == 'block') {
@@ -430,14 +404,9 @@ $('document').ready(function () {
                 success: function (msg) {
                     loader(0);
                     if (msg.status == 0) {
-                        $("#alert").removeClass("alert-success").addClass("alert-danger");
-                        $("#alert").css("display", "block");
-                        $("#validationAlert").html(msg.msg);
+                        toaster(msg.title, msg.msg, msg.type);
                     } else {
-                        $("#alert").removeClass("alert-danger").addClass("alert-success");
-                        $("#alert").css("display", "block");
-                        $("#validationAlert").html(msg.msg);
-
+                        toaster(msg.title, msg.msg, msg.type);
                         reloadDatatable.ajax.reload(null, false);
                     }
                     setTimeout(function () {
@@ -448,12 +417,16 @@ $('document').ready(function () {
         } else if (type == 'edit') {
             targetClass = $('#con-edit-modal');
             targetClass.modal('show');
-            editData = JSON.parse($(this).attr('data-array'));
-            targetClass.find('#id').val(editData.id);
-            targetClass.find('#role').val(editData.role);
-            targetClass.find('#description').val(editData.description);
+            data = JSON.parse($(this).attr('data-array'));
+            targetClass.find('#id').val(data.id);
+            targetClass.find('#role').val(data.role);
+            targetClass.find('#description').val(data.description);
         } else {
-
+            targetClass = $('#con-detail-modal');
+            targetClass.modal('show');
+            data = JSON.parse($(this).attr('data-array'));
+            targetClass.find('#role').text(data.role);
+            targetClass.find('#description').text(data.description);
         }
     });
     /*--========================= ( Role END ) =========================--*/
